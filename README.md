@@ -5,3 +5,7 @@ Tracking:
 - food
 - sleep
 - water
+
+
+Includes signing up for an account which can be stored, with encryption applied to relevant fields.
+Admin and normal users have different rights.
