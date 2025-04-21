@@ -1,3 +1,7 @@
-# 2033-Project
-2033 Group Project
-Fitness web app
+# Cura Web Application
+2021 - Flask Web applicaiton to help people get fit
+Tracking:
+- exercise
+- food
+- sleep
+- water
