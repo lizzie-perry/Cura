@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="content">
+            <h1>Sleep</h1>
+    </div>
+
+    <div class="column is-8 is-offset-2">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            <h4>Record Sleep</h4>
+        </div>
+        <div class="box">
+
+            <form method="POST" action="/enter_sleep">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-one-sixth">
+                        <div class="field">
+                            {{ form.csrf_token() }}
+                            <div class="control">
+                                {{ form.sleepStartTime(class="input", placeholder="Time you fell asleep") }}
+                                {% for error in form.sleepStartTime.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-sixth">
+                        <div class="field">
+                            {{ form.csrf_token() }}
+                            <div class="control">
+                                {{ form.sleepEndTime(class="input", placeholder="Time you woke up") }}
+                                {% for error in form.sleepEndTime.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <button class="button is-info is-centered">Record Sleep</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content">
+            <h4>Show Previous Sleeps</h4>
+        </div>
+        <div class="box">
+            {% if previous_sleep %}
+                <div class="field">
+                    <table class="table table is-striped is-hoverable is-fullwidth">
+                            <tr>
+                                <th>Sleep Start Time</th>
+                                <th>Sleep End Time</th>
+                            </tr>
+                            {% for sleep in previous_sleep %}
+                                <tr>
+                                    <td>{{ sleep.sleep_start }}</td>
+                                    <td>{{ sleep.sleep_end }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/show_previous_sleep">
+                <div>
+                    <button class="button is-info is-centered">Show Previous Sleeps</button>
+                </div>
+            </form>
+        </div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="content">
+            <h1>Exercise</h1>
+    </div>
+
+    <div class="column is-8 is-offset-2">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            <h4>Enter Exercise</h4>
+        </div>
+        <div class="box">
+
+            <form method="POST" action="/enter_exercise">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-one-sixth">
+<!--                        <input class="input" name="exerciseType" id="exerciseType" placeholder="Exercise Type" required>-->
+                        <div class="field">
+                            {{ form.csrf_token() }}
+                            <div class="control">
+                                {{ form.exerciseType(class="input", placeholder="Exercise Type") }}
+                                {% for error in form.exerciseType.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-sixth">
+<!--                        <input class="input" type="number" name="Duration" id="duration" placeholder="Duration(min)" required>-->
+                        <div class="field">
+                            {{ form.csrf_token() }}
+                            <div class="control">
+                                {{ form.exerciseDuration(class="input", placeholder="Exercise Duration (min)",min="0",step="1") }}
+                                {% for error in form.exerciseDuration.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <button class="button is-info is-centered">Submit Exercise</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content">
+            <h3>Show Previous Exercises</h3>
+        </div>
+        <div class="box">
+            {% if previous_exercises %}
+                <div class="field">
+                    <table class="table is-fullwidth">
+                            <tr>
+                                <th>Exercise ID</th>
+                                <th>Type</th>
+                                <th>StartTime</th>
+                                <th>Duration (min)</th>
+                                <th>Calories burned</th>
+                            </tr>
+                            {% for exercise in previous_exercises %}
+                                <tr>
+                                    <td>{{ exercise.ExerciseID }}</td>
+                                    <td>{{ exercise.exercise_type }}</td>
+                                    <td>{{ exercise.exercise_start_time }}</td>
+                                    <td>{{ exercise.exercise_duration }}</td>
+                                    <td>{{ exercise.exercise_calories }}</td>
+
+                                </tr>
+                            {% endfor %}
+                        </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/show_previous_exercise">
+                <div>
+                    <button class="button is-info is-centered">Show Previous Exercises</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content">
+            <h3>Show Today's Exercises</h3>
+        </div>
+            <div class="box">
+                {% if todays_exercises %}
+                    <div class="field">
+                        <table class="table is-fullwidth">
+                            <tr>
+                                <th>Exercise ID</th>
+                                <th>Type</th>
+                                <th>StartTime</th>
+                                <th>Duration (min)</th>
+                                <th>Calories burned</th>
+                            </tr>
+                            {% for exercise in todays_exercises %}
+                            <tr>
+                                <td>{{ exercise.ExerciseID }}</td>
+                                <td>{{ exercise.exercise_type }}</td>
+                                <td>{{ exercise.exercise_start_time }}</td>
+                                <td>{{ exercise.exercise_duration }}</td>
+                                <td>{{ exercise.exercise_calories }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+                <form method="POST" action="/show_todays_exercise">
+                    <div>
+                        <button class="button is-info is-centered">Show Today's Exercises</button>
+                    </div>
+                </form>
+            </div>
+	</div>
+
+
+{% endblock %}

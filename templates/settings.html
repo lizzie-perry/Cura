@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Settings</title>
+        <style>
+            .alert-info {
+                color: white;
+                padding:10px;
+                margin:10px;
+                margin-bottom: 20px;
+                border-radius: 15px;
+                background: rgb(50, 152, 220); /* Fallback for older browsers without RGBA-support */
+                background: rgba(50, 152, 220, 0.65);
+            }
+        </style>
+	</head>
+  <div class="column is-5 is-offset-4">
+        <div class="content">
+            <h1>Settings</h1>
+        </div>
+        <div class="box">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+           <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+        <br>
+            <h1 style="font-size: 120%;font-weight: 400;">Update your personal details</h1><br>
+         <form method="POST">
+              <div class="field">
+                    <label>First name:</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.firstname(class="input", placeholder=user_firstname) }}
+                        {% for error in form.firstname.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+              </div>
+              <div class="field">
+                    <label>Last name:</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.surname(class="input", placeholder=user_lastname) }}
+                        {% for error in form.surname.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+              </div>
+                 <div class="field">
+                    <label>Gender</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.gender(class="input", placeholder="Gender") }}
+                        {% for error in form.gender.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                 </div>
+             <div>
+                {{ form.submit(class="button is-info is-centered") }}
+            </div>
+        </form>
+        </div>
+     </div>
+	</html>
+{% endblock %}

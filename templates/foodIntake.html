@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content">
+            <h1>Food</h1>
+    </div>
+
+    <div class="column is-8 is-offset-2">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="box">
+            <div class="content">
+                    <h3>Search for food:</h3>
+                </div>
+            <form method="POST" action="/enter_food">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-one-sixth">
+                        <div class="field">
+                            {{ form.csrf_token() }}
+                            <div class="control">
+                                {{ form.foodType(class="input", placeholder="Search for food here!") }}
+                                {% for error in form.foodType.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <button class="button is-info is-centered">Find Item</button>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div class="content">
+            <h3>Today's Goal for Calorie Intake</h3>
+        </div>
+        <div class="box">
+            <div class="field">
+                <div class="progress-bar">
+                    <progress id="calorieGoal" value='{{ calorieGoal }}' max='{{ userCalorieGoal }}', style="height: 100px; width: 500px"> </progress>
+                    <br>
+                    {% if calorieGoal %}
+                    <b>{{ calorieGoal }}Kcal/{{ userCalorieGoal }}Kcal</b>
+                    {% endif %}
+                </div>
+            </div>
+            <form method="POST" action="/todaysCalorieGoal">
+                <div>
+                    <button class="button is-info is-centered">Show Today's Goal Progress</button>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="content">
+            <h3>Show Today's Meals</h3>
+        </div>
+        <div class="box">
+            {% if todays_meals %}
+            <div class="field">
+                <table class="table is-fullwidth">
+                    <tr>
+                        <th>Foodstuff</th>
+                        <th>Calories per serving</th>
+                        <th>Time recorded</th>
+                    </tr>
+                    {% for meal in todays_meals %}
+                    <tr>
+                        <td>{{ meal.food_type }}</td>
+                        <td>{{ meal.calorie_count }}</td>
+                        <td>{{ meal.date_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+            <form method="POST" action="/show_todays_meals">
+                <div>
+                    <button class="button is-info is-centered">Show Today's Meals</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

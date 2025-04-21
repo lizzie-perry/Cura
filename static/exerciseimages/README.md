@@ -1,0 +1,1 @@
+This directory should only hold exercise images as they may not be able to be reached!

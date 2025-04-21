@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="content">
+            <h1>Foods</h1>
+    </div>
+
+    <div class="column is-8 is-offset-2">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="box">
+
+            <div class="content">
+                <h3>Showing list for entry: {{ foodType }}</h3>
+            </div>
+            {% if foodList %}
+            <div class="field">
+                <table class="table is-fullwidth">
+                    <tr>
+                        <th>Food name</th>
+                        <th>Calories Per Serving</th>
+                        <th>Record meal</th>
+                    </tr>
+                    {% for food in foodList %}
+                        {% if food['nutriments']['energy-kcal_serving'] and food['product_name'] %}
+                        <tr>
+                            <td>{{ food['product_name'] }}</td>
+                            <td>{{ food['nutriments']['energy-kcal_serving'] }}</td>
+                            <td>
+                                <a class="button" href="{{ url_for('food.record_meal', p_name=food['product_name'], calories=food['nutriments']['energy-kcal_serving']) }}">Submit</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

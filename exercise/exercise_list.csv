@@ -1,0 +1,72 @@
+Bicycling(Slow),6.8
+Bicycling(Moderate),8.0
+Bicycling(Vigorous),10.0
+Bicycling(Racing),12.0
+Push ups,3.8
+Sit ups,3.8
+Pull-ups,3.8
+Lunges,3.8
+Rope skipping,11
+Ski machine,6.8
+Stretching,2.3
+Water aerobics,5.3
+Flow yoga,4.7
+Pilates,3.0
+Home exercise,3.8
+Weight training,5.0
+Dancing,7.8
+Fishing,3.5
+Lying,1.3
+Sitting,1.3
+Sleeping,0.95
+Standing,1.3
+Stacking wood,3.3
+Chopping Wood,4.5
+Cello,2.3
+Double bass,2.5
+Drumming,3.8
+Piano,2.3
+Musical instrument,2.0
+Trombone,3.5
+Trumpet,1.8
+Violin,2.5
+Running(Cross country),9.0
+Running(Marathon),13.3
+Running(General),8.0
+Sexual Activity(Light),1.3
+Sexual Activity(General),1.8
+Sexual Activity(Vigorous),2.8
+Badminton,7.0
+Basketball,6.5
+Bowling,3.8
+Boxing(General),12.8
+Boxing(Punching bag),5.5
+Boxing(Sparring),(7.8)
+Cricket(4.8)
+Football,8.0
+Golf,4.8
+Gymnastics,3.8
+Handball,12.0
+Hockey,7.8
+Ice Hockey,8.0
+Horseback riding,5.5
+Rock climbing,8.0
+Rugby,8.3
+Rollerblading,7.0
+Tennis,7.3
+Volleyball,4.0
+Backpacking,7.0
+Climbing,6.3
+Walking(Light),2.0
+Walking(Moderate),3.3
+Walking(Vigorous),5.0
+Swimming(Laps),5.8
+Swimming(Backstroke),9.5
+Swimming(Breaststroke),10.3
+Swimming(Butterfly),13.8
+Swimming(Crawl),8.3
+Skiing(Light),6.3
+Skiing(Moderate),9.0
+Skiing(Vigorous),12.5
+Snowboarding(Light),4.3
+Snowboarding(Moderate),5.3

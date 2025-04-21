@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="column is-5 is-offset-4">
+        <div class="content">
+            <h1>Admin</h1>
+        </div>
+        <div class="box">
+         {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-danger">
+                        {{ messages[0] }}. Go to <a href="{{ url_for('admin.admin') }}">admin page</a>.
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" enctype="multipart/form-data">
+                <div class="field">
+                    <label>Exercise Name</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.ExerciseName(class="input", placeholder="Name") }}
+                        {% for error in form.ExerciseName.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Exercise Type</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.ExerciseType(class="input", placeholder="Type") }}
+                        {% for error in form.ExerciseType.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Exercise Description</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.ExerciseDescription(class="input", placeholder="Description") }}
+                        {% for error in form.ExerciseDescription.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Calories Burned from Exercise</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.ExerciseBurnCal(class="input", placeholder="Calories Burned") }}
+                        {% for error in form.ExerciseBurnCal.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Image</label>
+                    {{ form.csrf_token() }}
+                    <div class="control">
+                        {{ form.ExerciseImage(class="input", placeholder="Submit Image") }}
+                        {% for error in form.ExerciseImage.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+               {{ form.submit(class="button is-info is-centered") }}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/landing.css">
+</head>
+<style>
+.navbar-brand :hover{
+    background-color:transparent !important;
+}
+</style>
+<!--style="background-color:#A1D1F4;-->
+<body>
+    <section class="hero is-info is-fullheight" style="background-color:White;">
+        <div class="hero-head">
+            <nav class="navbar" style="background-color:Black;">
+                <div class="container">
+                    <div class="navbar-brand" >
+                        <a class="navbar-item" href="{{ url_for('index') }}"  >
+                            <img src="{{url_for('static', filename='Cura.png')}}" alt="logo">
+                        </a>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu is-primary">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('index') }}">
+                                    <span>Home</span>
+                                </a>
+                            </span>
+                            {% if current_user.is_authenticated == False%}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.login') }}">
+                                    <span>Login</span>
+                                </a>
+                            </span>
+                            {% endif %}
+                            {% if current_user.is_authenticated == False%}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.register') }}">
+                                    <span>Register</span>
+                                </a>
+                            </span>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.dashboard') }}">
+                                    <span>Dashboard</span>
+                                </a>
+                            </span>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.trainer') }}">
+                                    <span>Virtual Trainer</span>
+                                </a>
+                            </span>
+                            {% endif %}
+<!--                            {% if current_user.is_authenticated %}-->
+<!--                            <span class="navbar-item">-->
+<!--                                <a class="button is-white is-outlined" href="{{ url_for('exercise.exercise') }}">-->
+<!--                                    <span>Exercise</span>-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            {% endif %}-->
+<!--                            {% if current_user.is_authenticated %}-->
+<!--                            <span class="navbar-item">-->
+<!--                                <a class="button is-white is-outlined" href="{{ url_for('water.water_intake') }}">-->
+<!--                                    <span>Water</span>-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            {% endif %}-->
+<!--                            {% if current_user.is_authenticated %}-->
+<!--                            <span class="navbar-item">-->
+<!--                                <a class="button is-white is-outlined" href="{{ url_for('food.food_intake') }}">-->
+<!--                                    <span>Food</span>-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            {% endif %}-->
+                            {% if current_user.is_authenticated and current_user.role=='admin' %}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('admin.admin') }}">
+                                    <span>Admin</span>
+                                </a>
+                            </span>
+                            {% endif %}
+<!--                            {% if current_user.is_authenticated %}-->
+<!--                            <span class="navbar-item">-->
+<!--                                <a class="button is-white is-outlined" href="{{ url_for('sleep.record_sleep') }}">-->
+<!--                                    <span>Sleep</span>-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            {% endif %}-->
+                            {% if current_user.is_authenticated %}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.profile') }}">
+                                    <span>Profile</span>
+                                </a>
+                            </span>
+                            {% endif %}
+<!--                            {% if current_user.is_authenticated %}-->
+<!--                            <span class="navbar-item">-->
+<!--                                <a class="button is-white is-outlined" href="{{ url_for('users.settings') }}">-->
+<!--                                    <span>Settings</span>-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            {% endif %}-->
+                            {% if current_user.is_authenticated %}
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{{ url_for('users.logout') }}">
+                                    <span>Logout</span>
+                                </a>
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="columns ">
+                <div class="column is-one-quarter">
+                    <figure class="image is-64x64">
+                        <img src="{{url_for('static', filename='Cura_invert-removebg-preview.png')}}">
+                    </figure>
+                </div>
+                <div class="column">
+                    <div class="content has-text-black">
+                        <p>
+                            The source code is licensed
+                            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content is licensed
+                            <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </footer>
+    </section>
+</body>
+
+</html>

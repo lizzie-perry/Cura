@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+{% block content %}
+<!--<div class="column is-5 is-offset-4">-->
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    .chart-wrapper {
+        height: 300px;
+        width: 384px;
+    }
+    .activity-chart-wrapper {
+        height: fit-content;
+        width: 1200px;
+    }
+    canvas{
+        margin: 0 auto;
+    }
+
+</style>
+<body>
+    <div class="column">
+
+        <div class="content">
+            <h1 class="has-text-black">Dashboard</h1>
+        </div>
+        <div class="content">
+            <h3 class="has-text-black">Hello {{ firstname }}</h3>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="box has-background-black has-text-white">
+                    <a class="button is-white is-outlined is-large is-fullwidth" href="{{ url_for('exercise.exercise') }}">
+                        <span>
+                            <figure class="image is-32x32">
+                                <img src="{{url_for('static', filename='Exercise.png')}}">
+                            </figure>
+                        </span>
+                        <span>Exercise</span>
+                    </a>
+                    <div class="chart-wrapper">
+                        <canvas id="ExerciseChart" width=400></canvas>
+                        <script>
+                            const ctx = document.getElementById('ExerciseChart');
+                            var myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: {{labels|tojson}},
+                                    datasets: [{
+                                        label: 'Calories burned this week',
+                                        data: {{exercise_data|tojson}},
+                                        borderColor: [
+                                            'rgba(255,99,132,1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero:true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box has-background-black has-text-white">
+                    <a class="button is-white is-outlined is-large is-fullwidth" href="{{ url_for('food.food_intake') }}">
+                        <span>
+                            <figure class="image is-32x32">
+                                <img src="{{url_for('static', filename='Food.png')}}">
+                            </figure>
+                        </span>
+                        <span>Food</span>
+                    </a>
+                    <div class="chart-wrapper">
+                        <canvas id="FoodChart" width=400></canvas>
+                        <script>
+                            const ctx1 = document.getElementById('FoodChart');
+                            var myChart = new Chart(ctx1, {
+                                type: 'line',
+                                data: {
+                                    labels: {{labels|tojson}},
+                                    datasets: [{
+                                        label: 'Calories Eaten This Week',
+                                        data: {{food_data|tojson}},
+                                        backgroundColor: [
+                                            'rgba(238, 233, 82, 0.2)',
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(238, 233, 82, 0.8)',
+                                            'rgba(255,99,132,1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero:true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box has-background-black has-text-white">
+                    <a class="button is-white is-outlined is-large is-fullwidth" href="{{ url_for('water.water_intake') }}">
+                        <span>
+                            <figure class="image is-32x32">
+                                <img src="{{url_for('static', filename='Water.png')}}">
+                            </figure>
+                         </span>
+                        <span>Water</span>
+                    </a>
+                    <div class="chart-wrapper">
+                        <canvas id="WaterChart" width=400></canvas>
+                        <script>
+                            const ctx2 = document.getElementById('WaterChart');
+                            var myChart = new Chart(ctx2, {
+                                type: 'line',
+                                data: {
+                                    labels: {{labels|tojson}},
+                                    datasets: [{
+                                        label: '# ml water drank this week',
+                                        data: {{water_data|tojson}},
+                                        backgroundColor: [
+                                            'rgba(114, 238, 158, 0.2)',
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(114, 238, 158, 0.8)',
+                                            'rgba(255,99,132,1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero:true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="box has-background-black has-text-white">
+                <a class="button is-white is-outlined is-large" href="{{ url_for('sleep.record_sleep') }}">
+                    <figure class="image is-32x32">
+                        <img src="{{url_for('static', filename='Sleep.png')}}">
+                    </figure>
+                    <span>Sleep</span>
+                </a>
+                <div class="activity-chart-wrapper">
+                    <canvas id="SleepChart" width=1000 height=200></canvas>
+                    <script>
+                        const ctx5 = document.getElementById('SleepChart');
+                        var myChart = new Chart(ctx5, {
+                            type: 'line',
+                            data: {
+                                labels: {{labels|tojson}},
+                                datasets: [{
+                                    label: 'Hours of sleep this week',
+                                    data: {{sleep_data|tojson}},
+                                    backgroundColor: [
+                                        'rgba(114, 238, 158, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(114, 238, 158, 0.8)',
+                                        'rgba(255,99,132,1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="content">
+                <h3 class="has-text-black">Activity</h3>
+            </div>
+            <div class="box has-background-black">
+                <div class="activity-chart-wrapper">
+                    <canvas id="ActivityChart" height=200 width=1000></canvas>
+                    <script>
+                        const ctx3 = document.getElementById('ActivityChart');
+                        var myChart = new Chart(ctx3, {
+                            type: 'line',
+                            data: {
+                                labels: {{labels|tojson}},
+                                datasets: [{
+                                    label: 'Activity Level Over Week',
+                                    data: {{activity_data|tojson}},
+                                    backgroundColor: [
+                                        'rgba(86, 162, 251, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(86, 162, 251, 0.8)',
+                                        'rgba(255,99,132,1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                tension: 0.4,
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

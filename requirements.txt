@@ -1,0 +1,16 @@
+Flask~=2.0.2
+WTForms~=3.0.0
+SQLAlchemy~=1.4.27
+flask_sqlalchemy
+mysql-client
+flask_wtf
+email_validator
+flask_login
+Werkzeug~=2.0.2
+pymysql
+cryptography==3.4.7
+sshtunnel~=0.4.0
+Pylint
+pycryptodome==3.10.1
+classes~=0.4.0
+openfoodfacts
